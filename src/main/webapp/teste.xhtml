@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Testes</title>
+	<!-- 	<h:outputStylesheet library="css" name="style.css" /> -->
+</h:head>
+
+<h:body>
+
+	<h:form>
+<!-- 		<h:selectOneMenu value="#{testeController.estado}"> -->
+<!-- 			<f:selectItems var="e" itemValue="#{e}" itemLabel="#{e.descricao}" -->
+<!-- 				value="#{testeController.estados}" /> -->
+<!-- 		</h:selectOneMenu> -->
+		
+        <p:selectOneMenu id="console" value="#{testeController.estado}" style="width:125px">
+           <f:selectItems var="e" itemValue="#{e}" itemLabel="#{e.descricao}"
+				value="#{testeController.estados}"/>
+        </p:selectOneMenu>
+		
+<!-- 		<h:selectOneRadio value="#{testeController.linguagem}"> -->
+<!-- 			<f:selectItem itemValue="0" itemLabel="Java" /> -->
+<!-- 			<f:selectItem itemValue="1" itemLabel="PHP" /> -->
+<!-- 			<f:selectItem itemValue="2" itemLabel="Java Script" /> -->
+<!-- 			<f:selectItem itemValue="3" itemLabel="Python" /> -->
+<!-- 			<f:selectItem itemValue="4" itemLabel="Go" /> -->
+<!-- 			<f:selectItem itemValue="5" itemLabel="C++" /> -->
+<!-- 			<f:selectItem itemValue="6" itemLabel="Pascal" /> -->
+<!-- 		</h:selectOneRadio> -->
+		
+		 <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+        <p:outputLabel  value="Linguagens:" />
+        <p:selectOneRadio id="city" value="#{radioView.city}"  layout="grid" columns="3">
+           <f:selectItem itemValue="0" itemLabel="Java" />
+			<f:selectItem itemValue="1" itemLabel="PHP" />
+			<f:selectItem itemValue="2" itemLabel="Java Script" />
+			<f:selectItem itemValue="3" itemLabel="Python" />
+			<f:selectItem itemValue="4" itemLabel="Go" />
+			<f:selectItem itemValue="5" itemLabel="C++" />
+			<f:selectItem itemValue="6" itemLabel="Pascal" />
+        </p:selectOneRadio>
+    </h:panelGrid>
+		
+
+		<p:selectBooleanCheckbox id="confirmacao"
+			value="#{testeController.confirmado}" />
+		<p:outputLabel value="Aceita?" for="confirmacao" />
+
+		<p:commandButton value="Enviar" action="#{testeController.enviar}" />
+
+
+		<p:selectManyCheckbox value="#{testeController.linguagens}">
+			<f:selectItem itemValue="0" itemLabel="Java" />
+			<f:selectItem itemValue="1" itemLabel="PHP" />
+			<f:selectItem itemValue="2" itemLabel="Java Script" />
+			<f:selectItem itemValue="3" itemLabel="Python" />
+			<f:selectItem itemValue="4" itemLabel="Go" />
+			<f:selectItem itemValue="5" itemLabel="C++" />
+			<f:selectItem itemValue="6" itemLabel="Pascal" />
+		</p:selectManyCheckbox>
+
+	</h:form>
+
+</h:body>
+
+</html>
