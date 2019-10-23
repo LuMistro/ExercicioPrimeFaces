@@ -9,130 +9,132 @@
 	<title>Cadastro de Pessoas</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<style>
-		.ui-growl {
-			top: auto;
-			right: 20px;
-			bottom: 20px;
-		}
-	</style>
-	
+.ui-growl {
+	top: auto;
+	right: 20px;
+	bottom: 20px;
+}
+</style>
+
 </h:head>
 
 <h:body>
 
 	<p:growl />
 
-     <h:form>
-     	
-     	<div class="ui-fluid">
-     	
-	   		<p:panelGrid columns="2" layout="grid"
-	   		columnClasses="ui-g-4 ui-md-3 ui-lg-2, ui-g-8 ui-md-9 ui-lg-10" 
-	   		styleClass="ui-panelgrid-blank" >
-	       		
-		        <p:outputLabel value="Nome: " for="nome" />
-		        <p:inputText
-		        	id="nome"
-		        	required="true"
-		        	requiredMessage="Nome deve ser preenchido"
-		        	value="#{cadastroPessoaController.pessoa.nome}" 
-		        	placeholder="Informe seu nome" />
-		
-		        <p:outputLabel value="E-mail: " for="email" />
-		        <p:inputText
-		        	id="email"
-		        	required="true"
-		        	requiredMessage="E-mail deve ser preenchido"
-		        	value="#{cadastroPessoaController.pessoa.email}"
-		        	placeholder="Informe seu e-mail" />
-		
-		        <p:outputLabel value="Nascimento: " for="nascimento" />
-		        <p:calendar
-		        	id="nascimento"
-		        	effect="fold"
-		        	navigator="true"
-		        	pattern="dd/MM/yyyy"
-		        	required="true"
-		        	requiredMessage="Nascimento deve ser preenchido"
-		        	placeholder="dd/mm/aaaa"
-		        	value="#{cadastroPessoaController.pessoa.nascimento}" >
-		        </p:calendar>
-		        
-		        <p:outputLabel value="Profissão: " for="profissao" />
-		        <p:selectOneMenu id="profissao" value="#{cadastroPessoaController.pessoa.profissao}">
-		        	<f:selectItem
-		        		itemLabel="Selecione uma profissão ..." 
-		        		noSelectionOption="true" />
-		        		
-		        	<f:selectItems 
-		        		var="p" 
-		        		value="#{cadastroPessoaController.profissoes}"
-		        		itemLabel="#{p.descricao}" />
-		        </p:selectOneMenu>
-			
-	   		</p:panelGrid>
-   		</div>
-      	
-   		<p:spacer height="10" />
-    	
-    	<p:toolbar>
-    	<f:facet name="left">
-    			<p:commandButton value="Salvar" ajax="false" icon="fa fa-save"
+	<h:form>
+
+		<p:megaMenu orientation="#{megaMenuView.orientation}"
+			style="margin-top:20px">
+			<p:submenu label="Cadastrar" icon="fa fa-plus">
+				<p:column>
+					<p:submenu label="Cadastrar">
+						<p:menuitem value="Profissão"
+							url="http://localhost:8080/CadastroPessoa/profissao.xhtml" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+		</p:megaMenu>
+
+		<div class="ui-fluid">
+
+			<p:panelGrid columns="2" layout="grid"
+				columnClasses="ui-g-4 ui-md-3 ui-lg-2, ui-g-8 ui-md-9 ui-lg-10"
+				styleClass="ui-panelgrid-blank">
+
+				<p:outputLabel value="Nome: " for="nome" />
+				<p:inputText id="nome" required="true"
+					requiredMessage="Nome deve ser preenchido"
+					value="#{cadastroPessoaController.pessoa.nome}"
+					placeholder="Informe seu nome" />
+
+				<p:outputLabel value="E-mail: " for="email" />
+				<p:inputText id="email" required="true"
+					requiredMessage="E-mail deve ser preenchido"
+					value="#{cadastroPessoaController.pessoa.email}"
+					placeholder="Informe seu e-mail" />
+
+				<p:outputLabel value="Nascimento: " for="nascimento" />
+				<p:calendar id="nascimento" effect="fold" navigator="true"
+					pattern="dd/MM/yyyy" required="true"
+					requiredMessage="Nascimento deve ser preenchido"
+					placeholder="dd/mm/aaaa"
+					value="#{cadastroPessoaController.pessoa.nascimento}">
+				</p:calendar>
+
+				<p:outputLabel value="Profissão: " for="profissao" />
+				<p:selectOneMenu id="profissao"
+					value="#{cadastroPessoaController.pessoa.profissao}">
+					<f:selectItem itemLabel="Selecione uma profissão ..."
+						noSelectionOption="true" />
+
+					<f:selectItems var="p"
+						value="#{cadastroPessoaController.profissoes}"
+						itemLabel="#{p.descricao}" />
+				</p:selectOneMenu>
+
+			</p:panelGrid>
+		</div>
+
+		<p:spacer height="10" />
+
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton value="Salvar" ajax="false" icon="fa fa-save"
 					action="#{cadastroPessoaController.salvar}" />
 
-     		<p:commandButton value="Limpar" ajax="false" icon="fa fa-eraser"
-     			action="#{cadastroPessoaController.limpar}" />
-    		</f:facet>
-    	</p:toolbar>
-      	
+				<p:commandButton value="Limpar" ajax="false" icon="fa fa-eraser"
+					action="#{cadastroPessoaController.limpar}" />
+			</f:facet>
+		</p:toolbar>
+
 	</h:form>
 
 	<p:spacer height="10" />
 
 	<h:form>
 
-		<p:dataTable 
-			var="p"
-			reflow="true"
+		<p:dataTable var="p" reflow="true"
 			value="#{cadastroPessoaController.pessoas}">
-			
+
 			<p:column headerText="Nome">
 				<h:outputText value="#{p.nome}" />
 			</p:column>
-			
+
 			<p:column headerText="E-mail">
 				<h:outputText value="#{p.email}" />
 			</p:column>
-			
+
 			<p:column headerText="Nascimento">
 				<h:outputText value="#{p.nascimento}">
 					<f:convertDateTime pattern="dd/MM/yyyy"
-     						timeZone="#{initParam.timezone}" />
+						timeZone="#{initParam.timezone}" />
 				</h:outputText>
 			</p:column>
-			
+
 			<p:column headerText="Idade">
 				<h:outputText value="#{p.idade}" />
 			</p:column>
-			
-				<p:column headerText="Profissão">
+
+			<p:column headerText="Profissão">
 				<h:outputText value="#{p.profissao.descricao}" />
 			</p:column>
-			
+
 			<p:column headerClass="colunaAcoes">
 				<p:commandButton icon="fa fa-pencil">
-					<f:setPropertyActionListener value="#{p}" 
+					<f:setPropertyActionListener value="#{p}"
 						target="#{cadastroPessoaController.pessoa}" />
 				</p:commandButton>
-				
-				<p:commandButton icon="fa fa-trash" action="#{cadastroPessoaController.excluir}">
-					<f:setPropertyActionListener value="#{p}" 
+
+				<p:commandButton icon="fa fa-trash"
+					action="#{cadastroPessoaController.excluir}">
+					<f:setPropertyActionListener value="#{p}"
 						target="#{cadastroPessoaController.pessoa}" />
 				</p:commandButton>
 			</p:column>
-		
+
 		</p:dataTable>
-	
+
 	</h:form>
 
 </h:body>
