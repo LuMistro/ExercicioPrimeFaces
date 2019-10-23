@@ -3,77 +3,87 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Cadastro de Profissões</title>
-	<h:outputStylesheet library="css" name="style.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<style>
+.ui-growl {
+	top: auto;
+	right: 20px;
+	bottom: 20px;
+}
+</style>
 </h:head>
 
+<p:growl />
+
 <h:body>
+	<h:form>
+		<div class="ui-fluid">
 
-	<div class="container">
-	
-		<h:messages globalOnly="true" 
-			infoClass="mensagemInfo" />
-	
-        <h:form>
-        
-	        <h:outputLabel value="Profissao: " for="profissao" />
-	        <h:message for="profissao" errorClass="errorForm" />
-	        <h:inputText
-	        	id="profissao"
-	        	required="true"
-	        	requiredMessage="Campo com preenchimento obrigatório"
-	        	value="#{cadastroProfissaoController.profissao.descricao}" 
-	        	pt:placeholder="Informe a profissão" />
-	
-			<h:commandButton value="Salvar" styleClass="cadastrar" 
-				action="#{cadastroProfissaoController.salvar}" />
-	        
-	        <h:commandButton value="Limpar" styleClass="limpar" 
-	        	action="#{cadastroProfissaoController.limpar}" />
-        	
-       	</h:form>
+			<p:panelGrid columns="2" layout="grid"
+				columnClasses="ui-g-4 ui-md-3 ui-lg-2, ui-g-8 ui-md-9 ui-lg-10"
+				styleClass="ui-panelgrid-blank">
 
-        <hr></hr>
 
-		<h:form>
+				<p:outputLabel value="Profissao: " for="profissao" />
+				<p:message for="profissao" errorClass="errorForm" />
+				<p:inputText id="profissao" required="true"
+					requiredMessage="Campo com preenchimento obrigatório"
+					value="#{cadastroProfissaoController.profissao.descricao}"
+					pt:placeholder="Informe a profissão" />
+			</p:panelGrid>
+		</div>
 
-			<h:dataTable 
-				var="p"
-				value="#{cadastroProfissaoController.profissoes}">
-				
-				<h:column>
-					<f:facet name="header">Profissão</f:facet>
-					<h:outputText value="#{p.descricao}" />
-				</h:column>
-				
-				<h:column headerClass="colunaAcoes">
-					<h:commandButton
-						image="/resources/imagens/edit-32x32.png">
-						
-						<f:setPropertyActionListener 
-							value="#{p}" 
-							target="#{cadastroProfissaoController.profissao}" />
-					</h:commandButton>
-					
-					<h:commandButton
-						action="#{cadastroProfissaoController.excluir}"
-						image="/resources/imagens/remove-32x32.png">
-						
-						<f:setPropertyActionListener 
-							value="#{p}" 
-							target="#{cadastroProfissaoController.profissao}" />
-					</h:commandButton>
-				</h:column>
-			
-			</h:dataTable>
-		
-		</h:form>
+		<p:spacer height="10" />
 
-    </div>
-    
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton value="Salvar" ajax="false" icon="fa fa-save"
+					action="#{cadastroPessoaController.salvar}" />
+
+				<p:commandButton value="Limpar" ajax="false" icon="fa fa-eraser"
+					action="#{cadastroPessoaController.limpar}" />
+			</f:facet>
+		</p:toolbar>
+
+		<p:spacer height="10" />
+
+	</h:form>
+
+
+	<h:form>
+
+		<p:dataTable var="p" value="#{cadastroProfissaoController.profissoes}">
+
+			<p:column>
+				<f:facet name="header">Profissão</f:facet>
+				<h:outputText value="#{p.descricao}" />
+			</p:column>
+
+			<p:column headerClass="colunaAcoes">
+				<p:commandButton icon="fa fa-pencil">
+					<f:setPropertyActionListener value="#{p}"
+						target="#{cadastroPessoaController.pessoa}" />
+				</p:commandButton>
+
+				<p:commandButton icon="fa fa-trash"
+					action="#{cadastroPessoaController.excluir}">
+					<f:setPropertyActionListener value="#{p}"
+						target="#{cadastroPessoaController.pessoa}" />
+				</p:commandButton>
+			</p:column>
+
+		</p:dataTable>
+
+	</h:form>
+
+
+
+
 </h:body>
 
 </html>
